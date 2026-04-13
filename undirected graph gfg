@@ -1,0 +1,25 @@
+class Solution:
+	def isCycle(self, V, edges):
+		adj=[[] for i in range(V)]
+		for u,v in edges:
+		    adj[u].append(v)
+		    adj[v].append(u)
+		visited=[False]*V
+		def bfs(start):
+		    q=[]
+		    q.append((start,-1))
+		    visited[start]=True
+		    while q:
+		        node,par=q.pop(0)
+		        for nei in adj[node]:
+		            if not visited[nei]:
+		                visited[nei]=True
+		                q.append((nei,node))
+		            elif nei!=par:
+		                return True
+		    return False
+		for i in range(V):
+		    if not visited[i]:
+		        if bfs(i):
+		            return True
+		return False
