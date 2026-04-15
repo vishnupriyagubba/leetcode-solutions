@@ -26,7 +26,7 @@ class Solution:
                 safe.append(i)
         return safe"""
         #bfs
-        n=len(graph)
+        """n=len(graph)
         out=[0]*n
         revg=[[]for i in range(n)]
         for u in range(n):
@@ -49,7 +49,25 @@ class Solution:
         for i in range(n):
             if safe[i]:
                 res.append(i)
+        return res"""
+        n=len(graph)
+        states=[0]*n
+        def dfs(node):
+            if states[node]!=0:
+                return states[node]==2
+            states[node]=1
+            for nei in graph[node]:
+                if states[nei]==1 or not dfs(nei):
+                    return False
+            states[node]=2
+            return True
+        res=[]
+        for i in range(n):
+            if dfs(i):
+                res.append(i)
         return res
+                
+
 
 
 
